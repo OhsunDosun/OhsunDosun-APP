@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:ohsundosun/config/flavor_config.dart';
 import 'package:ohsundosun/config/injectable.dart';
 import 'package:ohsundosun/config/route.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await dotenv.load(fileName: ".env");
+
+  String flavor = await const MethodChannel('flavor').invokeMethod<String>('getFlavor') ?? 'prod';
+  FlavorConfig(flavor);
 
   configureDependencies();
 
