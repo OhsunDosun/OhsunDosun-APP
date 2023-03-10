@@ -7,7 +7,7 @@ import 'package:ohsundosun/config/flavor_config.dart';
 import 'package:ohsundosun/config/injectable.dart';
 import 'package:ohsundosun/config/route.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await dotenv.load(fileName: ".env");
@@ -17,7 +17,7 @@ void main() async {
 
   configureDependencies();
 
-  runApp(
+  return runApp(
     const ProviderScope(
       child: MyApp(),
     ),
