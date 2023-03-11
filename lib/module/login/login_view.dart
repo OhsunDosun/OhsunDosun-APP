@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ohsundosun/config/route.dart';
+import 'package:ohsundosun/data/provider/auth_provider.dart';
 import 'package:ohsundosun/style/index.dart';
 import 'package:ohsundosun/widget/index.dart';
 
@@ -41,8 +42,13 @@ class LoginView extends ConsumerWidget {
                     hintText: '비밀번호',
                   ),
                   ODHeight(25),
-                  const ODButton(
+                  ODButton(
                     '로그인',
+                    onTap: () {
+                      final sign = ref.watch(signInProvider(email: "test@test.com", password: "1234"));
+
+                      sign.when(data: (data) {}, error: (error, stack) {}, loading: () {});
+                    },
                   ),
                   ODHeight(30),
                   Row(
