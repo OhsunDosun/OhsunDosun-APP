@@ -37,12 +37,24 @@ String appKey(AppKeyRef ref) {
 @riverpod
 class AccessToken extends _$AccessToken {
   @override
-  String build() {
-    return "";
+  String? build() {
+    return null;
   }
 
-  void set(SignStatus status) {
-    state = "status";
+  void update(String? accessToken) {
+    state = accessToken;
+  }
+}
+
+@riverpod
+class RefreshToken extends _$RefreshToken {
+  @override
+  String? build() {
+    return null;
+  }
+
+  void update(String? accessToken) {
+    state = accessToken;
   }
 }
 
