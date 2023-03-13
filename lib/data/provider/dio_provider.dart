@@ -13,13 +13,14 @@ Dio dio(DioRef ref) {
       debugPrint('[${options.method}] ${options.path}');
       debugPrint('REQUEST');
       debugPrint('${options.data}');
+      debugPrint('${options.headers["set-cookie"]}');
       debugPrint('____________________________________________');
       return handler.next(options);
     }, onResponse: (response, handler) {
       debugPrint('[${response.requestOptions.method}] ${response.requestOptions.path}');
       debugPrint('RESPONSE [${response.statusCode}]');
       debugPrint('${response.data}');
-      debugPrint('${response.headers}');
+      debugPrint('${response.headers["set-cookie"]}');
       debugPrint('____________________________________________');
       return handler.next(response);
     }, onError: (DioError e, handler) {
