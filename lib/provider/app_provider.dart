@@ -41,8 +41,8 @@ class AccessToken extends _$AccessToken {
     return null;
   }
 
-  void update(String? accessToken) {
-    state = accessToken;
+  void update(String? value) {
+    state = value;
   }
 }
 
@@ -53,31 +53,19 @@ class RefreshToken extends _$RefreshToken {
     return null;
   }
 
-  void update(String? accessToken) {
-    state = accessToken;
+  void update(String? value) {
+    state = value;
   }
 }
 
-// @riverpod
-// class SignStatusProvider extends _$SignStatusProvider {
-//   @override
-//   SignStatus build() {
-//     return SignStatus.signOut;
-//   }
-
-//   void set(SignStatus status) {
-//     state = status;
-//   }
-// }
-
 @riverpod
-class SignStatusProvider extends _$SignStatusProvider {
+class Sign extends _$Sign {
   @override
   SignStatus build() {
     return SignStatus.signOut;
   }
 
-  void set(SignStatus status) {
-    state = status;
+  void update(SignStatus value) {
+    state = value;
   }
 }

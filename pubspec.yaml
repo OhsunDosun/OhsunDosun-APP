@@ -33,6 +33,10 @@ dependencies:
   flutter:
     sdk: flutter
 
+  # Core
+  go_router: ^6.2.0
+  flutter_screenutil: ^5.6.1
+
   # State
   flutter_hooks: ^0.18.0
   hooks_riverpod: ^2.3.1
@@ -50,7 +54,6 @@ dependencies:
   flutter_svg: ^2.0.3
 
   # Util
-  flutter_screenutil: ^5.6.1
   flutter_secure_storage: ^8.0.0
   flutter_dotenv: ^5.0.2
 
