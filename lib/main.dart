@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:ohsundosun/data/provider/service_provider.dart';
+import 'package:ohsundosun/data/service/auth_service.dart';
 import 'package:ohsundosun/provider/app_provider.dart';
 import 'package:ohsundosun/provider/router_provider.dart';
+import 'package:ohsundosun/provider/storage_provider.dart';
 import 'package:ohsundosun/util/mode.dart';
 
 class Logger extends ProviderObserver {
@@ -23,14 +29,22 @@ class Logger extends ProviderObserver {
 }
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   await dotenv.load(fileName: ".env");
+
+  const storage = FlutterSecureStorage(
+    aOptions: AndroidOptions(
+      encryptedSharedPreferences: true,
+    ),
+  );
 
   return runApp(
     ProviderScope(
       overrides: [
         appModeProvider.overrideWithValue(await getAppMode()),
+        storageProvider.overrideWithValue(storage),
       ],
       observers: [Logger()],
       child: const MyApp(),
@@ -51,8 +65,6 @@ class MyApp extends ConsumerWidget {
         return MaterialApp.router(
           routerConfig: router,
           debugShowCheckedModeBanner: false,
-          // initialRoute: AppRoute.init,
-          // routes: AppRoute.routes,
         );
       },
     );

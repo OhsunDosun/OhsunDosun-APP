@@ -19,6 +19,7 @@ Dio dio(DioRef ref) {
       debugPrint('[${response.requestOptions.method}] ${response.requestOptions.path}');
       debugPrint('RESPONSE [${response.statusCode}]');
       debugPrint('${response.data}');
+      debugPrint('${response.headers}');
       debugPrint('____________________________________________');
       return handler.next(response);
     }, onError: (DioError e, handler) {

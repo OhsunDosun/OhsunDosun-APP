@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ohsundosun/data/provider/service_provider.dart';
+import 'package:ohsundosun/enum/sign_status.dart';
+import 'package:ohsundosun/provider/app_provider.dart';
 import 'package:ohsundosun/provider/router_provider.dart';
+import 'package:ohsundosun/provider/storage_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'login_provider.g.dart';
@@ -55,6 +57,7 @@ Future<void> onSignIn(
       password: password,
     );
 
+    ref.read(signProvider.notifier).update(SignStatus.signIn);
     ref.read(routerProvider).go(AppRoute.main);
 
     loading.update(false);
